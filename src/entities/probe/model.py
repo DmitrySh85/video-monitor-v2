@@ -1,13 +1,12 @@
 from datetime import datetime
 
 from sqlalchemy import ForeignKey, Float, DateTime, func
-from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy.orm import mapped_column, Mapped
 from sqlalchemy.dialects.postgresql import ENUM as PgEnum
 
 
 from src.db import Base
 from src.entities.probe.enums import ProbeStatus
-from src.entities.video.model import Video
 
 
 class Probe(Base):
@@ -27,8 +26,4 @@ class Probe(Base):
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), index=True
-    )
-
-    video: Mapped["Video"] = relationship(
-        back_populates="probes",
     )

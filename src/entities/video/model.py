@@ -19,10 +19,6 @@ class Video(Base):
     duration_seconds: Mapped[float | None] = mapped_column(Float, nullable=True)
     size_mb: Mapped[float | None] = mapped_column(Float, nullable=True)
 
-    storage: Mapped["Storage | None"] = relationship(
-        back_populates="videos",
-    )
-
     probes: Mapped[list["Probe"]] = relationship(
         back_populates="video",
         cascade="all, delete-orphan",
